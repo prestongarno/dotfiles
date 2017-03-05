@@ -1,27 +1,114 @@
-nmap g] :action GotoImplementation<CR>
 
-let mapleader = " "
-map <leader>a :action $SelectAll<CR>
-map <leader>b :action GotoDeclaration<CR>
-map <leader>c :action $Copy<CR>
-map <leader>d :action EditorDuplicate<CR>
-map <leader>e :action RecentFiles<CR>
-map <leader>f :action Find<CR>
-map <leader>g :action GotoLine<CR>
-map <leader>h :action TypeHierarchy<CR>
-map <leader>i :action ImplementMethods<CR>
-map <leader>m :action EditorScrollToCenter<CR>
-map <leader>n :action FileChooser.NewFolder<CR>
-map <leader>o :action MethodHierarchy.OverrideMethodAction<CR>
-map <leader>p :action ParameterInfo<CR>
-map <leader>q :action GuiDesigner.QuickJavadoc<CR>
-map <leader>r :action Replace<CR>
-map <leader>s :action SaveAll<CR>
-map <leader>t :action Vcs.UpdateProject<CR>
-map <leader>u :action GotoSuperMethod<CR>
-map <leader>v :action $Paste<CR>
-map <leader>w :action EditorSelectWord<CR>
-map <leader>x :action $Cut<CR>
-map <leader>y :action EditorDeleteLine<CR>
-map <leader>[ :action EditorCodeBlockStart<CR>
-map <leader>] :action EditorCodeBlockEnd<CR>
+let mapleader="'"
+
+"timeouts for the noremappings
+set notimeout
+set ttimeout
+
+" Refresh .ideavimrc
+noremap <leader>! :source ~/.ideavimrc<CR>
+
+" Single keymap for recent files because it's used so much
+map <leader><Tab> :action RecentFiles<CR>
+" Using f for Method navigation
+map f :action MethodUp<CR>
+map F :action MethodDown<CR>
+" Using v for walking through code changes
+nnoremap < :action JumpToLastChange<CR>
+nnoremap > :action JumpToNextChange<CR>
+" Quick JavaDoc
+map q :action QuickJavaDoc<CR>
+" Error navigation
+noremap z :action GotoNextError<CR>
+noremap Z :action GotoPreviousError<CR>
+" Misc editor Tab actions
+map <C-S-q> :action ReopenClosedTab<CR>
+map <C-q> :action CloseContent<CR>
+map <C-A-q> :action CloseAllEditorsButActive<CR>
+
+" Code folding
+" f = folding
+noremap <leader>fa :action CollapseAllRegions<CR>
+noremap <leader>fd :action CollapseDocComments<CR>
+noremap <leader>ff :action CollapseRegionRecursively<CR>
+noremap <leader>FA :action ExpandAllRegions<CR>
+noremap <leader>FD :action ExpandDocComments<CR>
+noremap <leader>FF :action ExpandRegionRecursively<CR>
+
+" Code generation
+" g = generate
+noremap <leader>gg :action Generate<CR>
+noremap <leader>gc :action GenerateConstructor<CR>
+noremap <leader>ga :action GenerateGetterAndSetter<CR>
+noremap <leader>gt :action GenerateGetter<CR>
+noremap <leader>gs :action GenerateSetter<CR>
+noremap <leader>ge :action GenerateEquals<CR>
+noremap <leader>gt :action GenerateTestMethod<CR>
+noremap <leader>gi :action ImplementMethods<CR>
+noremap <leader>go :action OverrideMethods<CR>
+
+"Javadoc stuff
+noremap <leader>jj :action FixDocComment<CR>
+noremap <leader>JJ :action GenerateJavadoc<CR>
+
+" Source Navigation and Source-specific shortcuts
+" s = source
+noremap <leader>ss :action FileStructurePopup<CR>
+noremap <leader>su :action FindUsagesInFile<CR>
+noremap <leader>sa :action FindUsages<CR>
+noremap <leader>so :action SelectAllOccurrences<CR>
+noremap <leader>sr :action RenameElement<CR>
+
+" Code Extraction
+" e = extract
+noremap <leader>ec :action ExtractClass<CR>
+noremap <leader>ef :action ExtractFunction<CR>
+noremap <leader>ei :action ExtractInterface<CR>
+noremap <leader>em :action ExtractMethod<CR>
+noremap <leader>eM :action ExtractModule<CR>
+noremap <leader>es :action ExtractSuperclass<CR>
+
+" Introduce variables
+" i = introduce
+noremap <leader>ic :action IntroduceConstant<CR>
+noremap <leader>if :action IntroduceField<CR>
+noremap <leader>iF :action IntroduceFunctionalParameter<CR>
+noremap <leader>ip :action IntroduceParameter<CR>
+noremap <leader>iP :action IntroduceParameterObject<CR>
+noremap <leader>it :action IntroduceProperty<CR>
+noremap <leader>ii :action IntroduceVariable<CR>
+noremap <leader>II :action Inline<CR>
+
+"Formatting shortcut
+noremap <leader>rf :action ReformatCode<CR>
+noremap <leader>rs :action ConvertIndentsToSpaces<CR>
+noremap <leader>rt :action ConvertIndentsToTabs<CR>
+
+" Code hierarchy navigation 
+" h = hierarchy
+noremap <leader>hi :action GotoImplementation<CR>
+noremap <leader>hd :action GotoDeclaration<CR>
+noremap <leader>ht :action GotoTypeDeclaration<CR>
+noremap <leader>hs :action GotoSuperMethod<CR>
+
+" Create commands
+" c = create
+noremap <leader>cc :action NewClass<CR>
+noremap <leader>ce :action NewElement<CR>
+noremap <leader>cf :action NewFile<CR>
+noremap <leader>cm :action NewModule<CR>
+noremap <leader>cs :action NewScratchFile<CR>
+
+" Debug commands
+" d = debug
+noremap <leader>dd :action ToggleLineBreakpoint<CR>
+noremap <leader>de :action EditBreakpoint<CR>
+noremap <leader>df :action ToggleFieldBreakpoint<CR>
+noremap <leader>dm :action ToggleMethodBreakpoint<CR>
+
+
+function! GoogleSearch()
+	     let searchterm = getreg("g")
+	          silent! exec "silent! !firefox \"http://google.com/search?q=" . searchterm . "\" &"
+	  endfunction
+vnoremap <S-F6> "gy<Esc>:call GoogleSearch()<CR>
