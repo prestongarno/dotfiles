@@ -10,17 +10,22 @@ noremap <leader>! :source ~/.ideavimrc<CR>
 
 " Single keymap for recent files because it's used so much
 map <leader><Tab> :action RecentFiles<CR>
+
 " Using f for Method navigation
 map f :action MethodUp<CR>
 map F :action MethodDown<CR>
-" Using v for walking through code changes
+
+" Using <> for walking through code changes
 nnoremap < :action JumpToLastChange<CR>
 nnoremap > :action JumpToNextChange<CR>
+
 " Quick JavaDoc
 map q :action QuickJavaDoc<CR>
+
 " Error navigation
 noremap z :action GotoNextError<CR>
 noremap Z :action GotoPreviousError<CR>
+
 " Misc editor Tab actions
 map <C-S-q> :action ReopenClosedTab<CR>
 map <C-q> :action CloseContent<CR>
@@ -105,10 +110,3 @@ noremap <leader>dd :action ToggleLineBreakpoint<CR>
 noremap <leader>de :action EditBreakpoint<CR>
 noremap <leader>df :action ToggleFieldBreakpoint<CR>
 noremap <leader>dm :action ToggleMethodBreakpoint<CR>
-
-
-function! GoogleSearch()
-	     let searchterm = getreg("g")
-	          silent! exec "silent! !firefox \"http://google.com/search?q=" . searchterm . "\" &"
-	  endfunction
-vnoremap <S-F6> "gy<Esc>:call GoogleSearch()<CR>
