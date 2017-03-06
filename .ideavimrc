@@ -12,8 +12,8 @@ noremap <leader>! :source ~/.ideavimrc<CR>
 map <leader><Tab> :action RecentFiles<CR>
 
 " Using f for Method navigation
-map f :action MethodUp<CR>
-map F :action MethodDown<CR>
+map <C-S-m> :action MethodUp<CR>
+map <C-m> :action MethodDown<CR>
 
 " Using <> for walking through code changes
 nnoremap < :action JumpToLastChange<CR>
@@ -25,6 +25,11 @@ map q :action QuickJavaDoc<CR>
 " Error navigation
 noremap z :action GotoNextError<CR>
 noremap Z :action GotoPreviousError<CR>
+
+"helpful java navigation
+"jump to block paramaters above 
+noremap <C-p> ?)\s\{-}\n\{-}{<CR>0f(
+noremap <C-S-p> /)\s\{-}\n\{-}{<CR>0f(
 
 " Misc editor Tab actions
 map <C-S-q> :action ReopenClosedTab<CR>
