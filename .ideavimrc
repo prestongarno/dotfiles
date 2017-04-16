@@ -1,10 +1,14 @@
 
 let mapleader="'"
 
+set surround
+
 "timeouts for the noremappings
 set notimeout
 set ttimeout
 
+" Add semi and esc
+noremap <leader>; <Esc>$r;
 " Refresh .ideavimrc
 noremap <leader>! :source ~/.ideavimrc<CR>
 
@@ -19,6 +23,23 @@ map <C-m> :action MethodDown<CR>
 nnoremap < :action JumpToLastChange<CR>
 nnoremap > :action JumpToNextChange<CR>
 
+" break line                                         
+nnoremap <leader>b i<CR><Esc>k$
+
+" better comment func
+map <C-/> mr0wi//<Esc>`rj
+" make x put into dev/null
+vmap e "_dd<Esc>
+" next word occurence under cursor
+nnoremap <leader>n evb"nyw/<C-r>n<CR>
+" break from expression
+imap <leader>j <Esc>f)a
+
+" Popup Error message
+nnoremap <leader><Esc> :action ShowErrorDescription<CR>
+
+" Move (refactor)
+noremap <leader>mm :action Move<CR>
 " Quick JavaDoc
 map q :action QuickJavaDoc<CR>
 
@@ -40,10 +61,10 @@ map <C-A-q> :action CloseAllEditorsButActive<CR>
 " f = folding
 noremap <leader>fa :action CollapseAllRegions<CR>
 noremap <leader>fd :action CollapseDocComments<CR>
-noremap <leader>ff :action CollapseRegionRecursively<CR>
-noremap <leader>FA :action ExpandAllRegions<CR>
-noremap <leader>FD :action ExpandDocComments<CR>
-noremap <leader>FF :action ExpandRegionRecursively<CR>
+noremap <leader>fF :action CollapseRegionRecursively<CR>
+noremap <leader>fA :action ExpandAllRegions<CR>
+noremap <leader>fD :action ExpandDocComments<CR>
+noremap <leader>fF :action ExpandRegionRecursively<CR>
 
 " Code generation
 " g = generate
@@ -59,15 +80,16 @@ noremap <leader>go :action OverrideMethods<CR>
 
 "Javadoc stuff
 noremap <leader>jj :action FixDocComment<CR>
-noremap <leader>JJ :action GenerateJavadoc<CR>
-
+noremap <leader>ju :action GenerateJavadoc<CR>
+noremap <leader>jf :%s#\(\n\s\+\\\|\t\+\\\|\/\+\)\(/\)\(\*\+\)\n#\r\t\2\*****************************************\r#g<CR>:%s#\n\(\t\+\\\|\s\+\)\(\*\+\/\)#\r\1\****************************************/#g<CR>
+noremap <leader>rs :action ConvertIndentsToSpaces<CR>
 " Source Navigation and Source-specific shortcuts
 " s = source
 noremap <leader>ss :action FileStructurePopup<CR>
 noremap <leader>su :action FindUsagesInFile<CR>
 noremap <leader>sa :action FindUsages<CR>
 noremap <leader>so :action SelectAllOccurrences<CR>
-noremap <leader>sr :action RenameElement<CR>
+noremap <leader>sr :action RenameElement<CR>i
 
 " Code Extraction
 " e = extract
@@ -91,7 +113,7 @@ noremap <leader>II :action Inline<CR>
 
 "Formatting shortcut
 noremap <leader>rf :action ReformatCode<CR>
-noremap <leader>rs :action ConvertIndentsToSpaces<CR>
+noremap <leader>rr :%s#\(case\s\+\\\|\S\+:\)\n\s\+\(return\s\\\|\S\\\|\n\{-};\)#\1 \2#g<CR>
 noremap <leader>rt :action ConvertIndentsToTabs<CR>
 
 " Code hierarchy navigation 
@@ -115,3 +137,10 @@ noremap <leader>dd :action ToggleLineBreakpoint<CR>
 noremap <leader>de :action EditBreakpoint<CR>
 noremap <leader>df :action ToggleFieldBreakpoint<CR>
 noremap <leader>dm :action ToggleMethodBreakpoint<CR>
+
+"=======================
+"Functions
+"=======================
+
+function! MyFormatter()
+endfunction
