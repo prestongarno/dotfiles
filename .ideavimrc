@@ -1,5 +1,5 @@
 
-let mapleader="'"
+let mapleader=","
 
 set surround
 
@@ -14,6 +14,9 @@ noremap <leader>! :source ~/.ideavimrc<CR>
 
 " Single keymap for recent files because it's used so much
 map <leader><Tab> :action RecentFiles<CR>
+nnoremap <S-A-j> :action VimMotionPreviousTab<CR>
+nnoremap <S-A-k> :action VimMotionNextTab<CR>
+
 
 " Using f for Method navigation
 map <C-S-m> :action MethodUp<CR>
@@ -28,11 +31,11 @@ nnoremap <leader>b i<CR><Esc>k$
 
 " better comment func
 map <C-/> mr0wi//<Esc>`rj
-" make x put into dev/null
+" make e put into dev/null
 vmap e "_dd<Esc>
 " next word occurence under cursor
 nnoremap <leader>n evb"nyw/<C-r>n<CR>
-" break from expression
+" break from expression with parens
 imap <leader>j <Esc>f)a
 
 " Popup Error message
@@ -44,8 +47,8 @@ noremap <leader>mm :action Move<CR>
 map q :action QuickJavaDoc<CR>
 
 " Error navigation
-noremap z :action GotoNextError<CR>
-noremap Z :action GotoPreviousError<CR>
+noremap <leader>z :action GotoNextError<CR>
+noremap <leader>Z :action GotoPreviousError<CR>
 
 "helpful java navigation
 "jump to block paramaters above 
@@ -81,7 +84,7 @@ noremap <leader>go :action OverrideMethods<CR>
 "Javadoc stuff
 noremap <leader>jj :action FixDocComment<CR>
 noremap <leader>ju :action GenerateJavadoc<CR>
-noremap <leader>jf :%s#\(\n\s\+\\\|\t\+\\\|\/\+\)\(/\)\(\*\+\)\n#\r\t\2\*****************************************\r#g<CR>:%s#\n\(\t\+\\\|\s\+\)\(\*\+\/\)#\r\1\****************************************/#g<CR>
+noremap <leader>jf :%s#\(\n\s\+\\\|\t\+\)\(/\)\(\*\+\)\n#\r\t\2\*****************************************\r#g<CR>:%s#\n\(\t\+\\\|\s\+\)\(\*\+\/\)#\r\1\****************************************/#g<CR>
 noremap <leader>rs :action ConvertIndentsToSpaces<CR>
 " Source Navigation and Source-specific shortcuts
 " s = source
@@ -137,10 +140,3 @@ noremap <leader>dd :action ToggleLineBreakpoint<CR>
 noremap <leader>de :action EditBreakpoint<CR>
 noremap <leader>df :action ToggleFieldBreakpoint<CR>
 noremap <leader>dm :action ToggleMethodBreakpoint<CR>
-
-"=======================
-"Functions
-"=======================
-
-function! MyFormatter()
-endfunction
