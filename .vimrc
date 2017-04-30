@@ -24,12 +24,21 @@ Plugin 'reedes/vim-pencil'
 Plugin 'dbmrq/vim-ditto'
 Plugin 'reedes/vim-wordy'
 Plugin 'junegunn/limelight.vim'
-"Plugin 'itchyny/dictionary'
+Plugin 'itchyny/dictionary'
 
 call vundle#end()
 filetype plugin indent on
 
+call plug#begin()
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf'
+call plug#end()
 
+colorscheme apprentice
+
+nnoremap gb :ls<CR>:b<Space>
+nnoremap <leader>r :MRU<CR>
+nnoremap <leader><Tab> :FZF ./<CR>
 
 "Auto plugin commands config
 au FileType markdown,text,tex DittoOn
@@ -68,8 +77,6 @@ nnoremap <leader>w :w<CR>
 map <leader>f "qp
 
 syntax enable
-set background=dark
-colorscheme solarized
 let g:lexical#thesaurus_key = '<leader><S-t>'
 
 func! WordProcessorMode() 
