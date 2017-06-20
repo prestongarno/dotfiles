@@ -1,12 +1,12 @@
-execute pathogen#infect()
+call pathogen#infect()
 syntax on
 filetype plugin indent on
 set nu
 set relativenumber
 " show existing tab with 4 spaces width
-set tabstop=3
+set tabstop=2
 " when indenting with '>', use 4 spaces width
-set shiftwidth=3
+set shiftwidth=2
 " On pressing tab, insert 4 spaces
 set expandtab
 set nocompatible              
@@ -18,13 +18,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'ervandew/supertab'
-Plugin 'reedes/vim-pencil'
-Plugin 'dbmrq/vim-ditto'
-Plugin 'reedes/vim-wordy'
-Plugin 'junegunn/limelight.vim'
-Plugin 'itchyny/dictionary'
 
 call vundle#end()
 filetype plugin indent on
@@ -34,7 +28,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf'
 call plug#end()
 
-colorscheme apprentice
 
 nnoremap gb :ls<CR>:b<Space>
 nnoremap <leader>r :MRU<CR>
@@ -76,36 +69,11 @@ nnoremap <leader>w :w<CR>
 
 map <leader>f "qp
 
-syntax enable
 let g:lexical#thesaurus_key = '<leader><S-t>'
 
-func! WordProcessorMode() 
-    setlocal formatoptions=1 
-    map j gj 
-    map k gk
-    nnoremap <leader>c :!wc -w %<CR>
-    setlocal spell spelllang=en_us 
-    set thesaurus+=/Users/sbrown/.vim/thesaurus/mthesaur.txt
-    set complete+=s
-    set formatprg=par
-    setlocal wrap 
-    set linespace=3
-    setlocal linebreak 
-endfu 
-com! WP call WordProcessorMode()
 
-function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    hi statusline guibg=Cyan ctermfg=6 guifg=Black ctermbg=0
-  elseif a:mode == 'r'
-    hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
-  else
-    hi statusline guibg=DarkRed ctermfg=1 guifg=Black ctermbg=0
-  endif
-endfunction
-
-au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
+"au InsertEnter * call InsertStatuslineColor(v:insertmode)
+"au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
 
 " default the statusline to green when entering Vim
 hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
@@ -124,3 +92,5 @@ set statusline+=Line:%l/%L[%p%%]            " line X of Y [percent of file]
 set statusline+=\ Col:%c                    " current column
 set statusline+=\ Buf:%n                    " Buffer number
 set statusline+=\ [%b][0x%B]\               " ASCII and byte code under cursor
+
+so ~/.vim/colors/smyck.vim

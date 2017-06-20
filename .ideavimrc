@@ -17,6 +17,8 @@ map <leader><Tab> :action RecentFiles<CR>
 nnoremap <S-A-j> :action VimMotionPreviousTab<CR>
 nnoremap <S-A-k> :action VimMotionNextTab<CR>
 
+" :x close
+nnoremap <leader>x :x<CR>
 
 " Using f for Method navigation
 map <C-S-m> :action MethodUp<CR>
