@@ -3,6 +3,13 @@ syntax on
 filetype plugin indent on
 set nu
 set relativenumber
+
+set clipboard=unnamed
+nnoremap <C-S-p> r !pbpaste<CR>
+
+"timeouts for the noremappings
+set timeoutlen=175
+imap <ESC><ESC> <ESC><S-a>
 " show existing tab with 4 spaces width
 set tabstop=2
 " when indenting with '>', use 4 spaces width
@@ -50,11 +57,6 @@ map <leader>d "_x
 nnoremap <leader>ch :cd ../<CR><CR>:pwd<CR>
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
-
-set cul
-set gcr=n:lCursor
-set colorcolumn=80
-
 "test
 "=============================
 " Custom shortcuts
@@ -69,11 +71,6 @@ nnoremap <leader>w :w<CR>
 
 map <leader>f "qp
 
-let g:lexical#thesaurus_key = '<leader><S-t>'
-
-
-"au InsertEnter * call InsertStatuslineColor(v:insertmode)
-"au InsertLeave * hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
 
 " default the statusline to green when entering Vim
 hi statusline guibg=DarkGrey ctermfg=8 guifg=White ctermbg=15
@@ -92,5 +89,3 @@ set statusline+=Line:%l/%L[%p%%]            " line X of Y [percent of file]
 set statusline+=\ Col:%c                    " current column
 set statusline+=\ Buf:%n                    " Buffer number
 set statusline+=\ [%b][0x%B]\               " ASCII and byte code under cursor
-
-so ~/.vim/colors/smyck.vim
